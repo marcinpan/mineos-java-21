@@ -1,0 +1,98 @@
+services:
+  mineos:
+    build: .
+    image: my-mineos:java-21
+
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4096M
+    environment:
+      GID: '568'
+      GROUP_GID: '568'
+      GROUP_ID: '568'
+      GROUP_NAME: admin
+      NVIDIA_VISIBLE_DEVICES: void
+      PGID: '568'
+      PUID: '568'
+      SERVER_PORT: '30052'
+      TZ: Etc/UTC
+      UID: '568'
+      UMASK: '002'
+      UMASK_SET: '002'
+      USER_ID: '568'
+      USER_NAME: admin
+      USER_PASSWORD: ${USER_PASSWORD}
+      USER_UID: '568'
+      USE_HTTPS: 'false'
+    group_add:
+      - 568
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_interval: 2s
+      start_period: 15s
+      test: >-
+        curl --request GET --silent --output /dev/null --show-error --fail
+        http://127.0.0.1:30052/admin/login.html
+      timeout: 5s
+    platform: linux/amd64
+    ports:
+      - mode: ingress
+        protocol: tcp
+        published: 30052
+        target: 30052
+    privileged: False
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges=true
+    stdin_open: False
+    stop_grace_period: 600s
+    tty: False
+    volumes:
+      - bind:
+          create_host_path: False
+          propagation: rprivate
+        read_only: False
+        source: /mnt/vol1/apps/mineos/mineos-data
+        target: /var/games/minecraft
+        type: bind
+volumes: {}
+x-notes: >+
+  # MineOS
+
+
+  ## Security
+
+
+  ### Container: [mineos]
+
+
+  - Is running as unknown user
+
+  - Is running as unknown group
+
+
+  ## Bug Reports and Feature Requests
+
+
+  If you find a bug in this app or have an idea for a new feature, please file
+  an issue at
+
+  https://github.com/truenas/apps
+
+x-portals:
+  - host: 0.0.0.0
+    name: Web UI
+    path: /
+    port: 30052
+    scheme: http
