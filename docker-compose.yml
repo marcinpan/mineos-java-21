@@ -1,8 +1,9 @@
 services:
   mineos:
     build: .
-    image: my-mineos:java-21
-
+    image: my-mineos-java21:latest
+    container_name: mineos
+    
     cap_add:
       - CHOWN
       - DAC_OVERRIDE
@@ -17,6 +18,7 @@ services:
           cpus: '2'
           memory: 4096M
     environment:
+      # Zastąp te wartości swoimi danymi.
       GID: '568'
       GROUP_GID: '568'
       GROUP_ID: '568'
@@ -31,7 +33,7 @@ services:
       UMASK_SET: '002'
       USER_ID: '568'
       USER_NAME: admin
-      USER_PASSWORD: ${USER_PASSWORD}
+      USER_PASSWORD: "Twoje_bezpieczne_haslo"  # Zmień to na swoje hasło!
       USER_UID: '568'
       USE_HTTPS: 'false'
     group_add:
@@ -47,14 +49,14 @@ services:
       timeout: 5s
     platform: linux/amd64
     ports:
-  - mode: ingress
-    protocol: tcp
-    published: 30052
-    target: 30052
-  - mode: ingress
-    protocol: tcp
-    published: 25565
-    target: 25565
+      - mode: ingress
+        protocol: tcp
+        published: 30052
+        target: 30052
+      - mode: ingress
+        protocol: tcp
+        published: 25565
+        target: 25565
     privileged: False
     restart: unless-stopped
     security_opt:
@@ -73,31 +75,9 @@ services:
 volumes: {}
 x-notes: >+
   # MineOS
-
-
-  ## Security
-
-
-  ### Container: [mineos]
-
-
-  - Is running as unknown user
-
-  - Is running as unknown group
-
-
-  ## Bug Reports and Feature Requests
-
-
-  If you find a bug in this app or have an idea for a new feature, please file
-  an issue at
-
-  https://github.com/truenas/apps
-
 x-portals:
   - host: 0.0.0.0
     name: Web UI
     path: /
     port: 30052
-
     scheme: http
