@@ -47,10 +47,14 @@ services:
       timeout: 5s
     platform: linux/amd64
     ports:
-      - mode: ingress
-        protocol: tcp
-        published: 30052
-        target: 30052
+  - mode: ingress
+    protocol: tcp
+    published: 30052
+    target: 30052
+  - mode: ingress
+    protocol: tcp
+    published: 25565
+    target: 25565
     privileged: False
     restart: unless-stopped
     security_opt:
@@ -95,4 +99,5 @@ x-portals:
     name: Web UI
     path: /
     port: 30052
+
     scheme: http
