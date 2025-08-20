@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   mineos:
-    # Użyj swojego obrazu z Docker Hub.
+    # obraz z Docker Hub.
     image: marcinpa/mineos-java-21:latest
     container_name: mineos
     
-    # Usuwamy sekcję 'build', bo obraz jest pobierany z Docker Hub, a nie budowany lokalnie.
+    #
 
     cap_add:
       - CHOWN
@@ -84,3 +84,4 @@ x-portals:
     path: /
     port: 30052
     scheme: http
+
