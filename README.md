@@ -6,20 +6,20 @@ Jak używać?
 Obraz jest dostępny na Docker Hub. Aby go użyć, potrzebujesz pliku docker-compose.yml, który znajdziesz w tym repozytorium.
 Wymagania
 
-    Docker
+- Docker
 
-    Docker Compose
+- Docker Compose
 
-Instrukcje
+Instrukcje:
 
-    Sklonuj to repozytorium na swój serwer lub komputer lokalny:
+1.Sklonuj to repozytorium na swój serwer lub komputer lokalny:
 
     git clone https://github.com/marcinpa/mineos-java-21.git
     cd mineos-java-21
 
-    Upewnij się, że plik docker-compose.yml jest poprawnie skonfigurowany. Zwróć szczególną uwagę na hasło i ścieżki.
+2.Upewnij się, że plik docker-compose.yml jest poprawnie skonfigurowany. Zwróć szczególną uwagę na hasło i ścieżki.
 
-    Uruchom kontener za pomocą Docker Compose:
+3.Uruchom kontener za pomocą Docker Compose:
 
     docker-compose up -d
 
