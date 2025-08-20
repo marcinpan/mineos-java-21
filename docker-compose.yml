@@ -1,9 +1,13 @@
+version: '3.8'
+
 services:
   mineos:
-    build: .
-    image: my-mineos-java21:latest
+    # Użyj swojego obrazu z Docker Hub.
+    image: marcinpa/mineos-java-21:latest
     container_name: mineos
     
+    # Usuwamy sekcję 'build', bo obraz jest pobierany z Docker Hub, a nie budowany lokalnie.
+
     cap_add:
       - CHOWN
       - DAC_OVERRIDE
@@ -65,13 +69,12 @@ services:
     stop_grace_period: 600s
     tty: False
     volumes:
-      - bind:
-          create_host_path: False
-          propagation: rprivate
-        read_only: False
-        source: /mnt/vol1/apps/mineos/mineos-data
-        target: /var/games/minecraft
-        type: bind
+      # Używamy ścieżki relatywnej, która tworzy folder 'data'
+      # w tym samym miejscu, gdzie jest plik docker-compose.yml
+      - ./data:/var/games/minecraft
+      
+# Sekcje poniżej są zbędne, jeśli nie są używane w serwisach, 
+# ale nie przeszkadzają w działaniu.
 volumes: {}
 x-notes: >+
   # MineOS
