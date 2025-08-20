@@ -14,7 +14,7 @@ Instrukcje:
 
 1.Sklonuj to repozytorium na swój serwer lub komputer lokalny:
 
-    git clone https://github.com/marcinpa/mineos-java-21.git
+    git clone https://github.com/marcinpan/mineos-java-21.git
     cd mineos-java-21
 
 2.Upewnij się, że plik docker-compose.yml jest poprawnie skonfigurowany. Zwróć szczególną uwagę na hasło i ścieżki.
